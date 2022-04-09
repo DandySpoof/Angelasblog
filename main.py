@@ -82,8 +82,8 @@ class User(UserMixin, db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
-    email = db.Column(db.String(50), unique=True, nullable=False)
-    password = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(70), unique=True, nullable=False)
+    password = db.Column(db.Text, nullable=False)
 
     ## A LIST OF BlogPost OBJECTS -  DEFINING RELATIONSHIP TO POSTS, USERS IS THE - "PARENT (ONE)"
     posts = relationship("BlogPost", back_populates="author")
