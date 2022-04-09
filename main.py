@@ -11,10 +11,12 @@ from forms import CreatePostForm, NewUser, Login, CommentForm
 from flask_gravatar import Gravatar
 from random import randint
 from functools import wraps
+import os
+import psycopg2
 
 #CREATE FLASK APP
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "sqlite:///blog.db")
 
 #CONNECTING TEXT EDITOR FIELD TO APP
 ckeditor = CKEditor(app)
@@ -33,7 +35,7 @@ gravatar = Gravatar(app,
                     base_url=None)
 
 #CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
