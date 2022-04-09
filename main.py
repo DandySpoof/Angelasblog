@@ -16,7 +16,7 @@ import psycopg2
 
 #CREATE FLASK APP
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "sqlite:///blog.db")
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "sqlite:///blog.db").replace("postgres://", "postgresql://", 1)
 
 #CONNECTING TEXT EDITOR FIELD TO APP
 ckeditor = CKEditor(app)
